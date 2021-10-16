@@ -36,16 +36,36 @@ def executor(binaryName, n):
 def start():
     # print("Starting...")
     timer = Timer()
-
+# --------------------Linear
     inputSize = []
     timeForExec = []
 
     starti = 1
     endi = 100000000
-    stepi = 100000
+    stepi = 700000
     for i in range(starti, endi, stepi):
         timer.start()
         executor("linear.exe", i)
+        timer.stop()
+        timeForExec.append(timer.get_diff())
+        inputSize.append(i)
+        timer.reset()
+        if(i % (endi/50 ) < 100):
+            print("progress:", str(round((i/endi)*100, 1)) + "%")
+    
+
+    plt.scatter(inputSize, timeForExec, marker='.')
+    plt.show()
+#   ------------------Quadratic
+    inputSize = []
+    timeForExec = []
+
+    starti = 1
+    endi = 10000
+    stepi = 100
+    for i in range(starti, endi, stepi):
+        timer.start()
+        executor("quadratic.exe", i)
         timer.stop()
         timeForExec.append(timer.get_diff())
         inputSize.append(i)
